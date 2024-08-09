@@ -1,4 +1,4 @@
-// Print the No oF N using recursive way
+// Print the No oF N increasing order by using recursive way
 
 #include <iostream>
 using namespace std;
@@ -10,8 +10,9 @@ void print(int n)
     {
         return;
     }
+
+    print(n - 1);
     cout << n << " ";
-    return print(n - 1);
 }
 
 int main()
