@@ -1,4 +1,5 @@
-// Given an array of size N. find equilibrium index (find index whose sum of left and right element equal) arr= 1 2 3 4 8 10  arr= -7 1 5 2 -4 3 0
+// Given an array of size N. find equilibrium index
+// (find index whose sum of left and right element equal) arr= 1 2 3 4 8 10  arr= -7 1 5 2 -4 3 0
 
 #include <iostream>
 using namespace std;

@@ -1,5 +1,5 @@
 // Print the subArr sum with multiple quries q;
-// arr : 3 6 12 1 2 5 7 8 9
+// arr : -3 6 12 1 2 5 7 8 9
 
 #include <iostream>
 using namespace std;
