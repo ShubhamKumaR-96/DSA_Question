@@ -3,8 +3,8 @@ using namespace std;
 
 bool checkIthPos(int n, int i)
 {
-    int mask = 1 << i;
-    if ((n & mask) == 0)
+    int mask = 1 << i;    // n & 1 => 1 set
+    if ((n & mask) == 0) // n & 1 => 0 unset
     {
         return false;
     }
