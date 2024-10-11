@@ -56,10 +56,5 @@ int main() {
     int B1 = 2;
     cout << "Number of pairs (Example 1): " << pairsWithGivenSum(A1, B1) << endl;
 
-    // Example 2
-    vector<int> A2 = {1, 5, 7, 10};
-    int B2 = 8;
-    cout << "Number of pairs (Example 2): " << pairsWithGivenSum(A2, B2) << endl;
-
     return 0;
 }

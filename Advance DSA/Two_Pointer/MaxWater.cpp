@@ -1,38 +1,34 @@
+// Given N array elements (Heights of walls). Pick any 2 walls calculate the max water. 
+// Accumlate b/w any 2 waters arr= 3 5 4 7 3 6 5 4 1 2  
+// Note => Water accumalted = min(two walls)* width
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
-int maxArea(vector<int>& A) {
-    int left = 0;
-    int right = A.size() - 1;
-    int maxArea = 0;
-
-    while (left < right) {
-        // Calculate the current area
-        int height = min(A[left], A[right]);
-        int width = right - left;
-        int currentArea = height * width;
-
-        // Update max area if current is larger
-        maxArea = max(maxArea, currentArea);
-
-        // Move the smaller height pointer
-        if (A[left] < A[right]) {
-            left++;
-        } else {
-            right--;
+int maxArea(vector<int> &A)
+{
+    int maxArea = 0, p1 = 0, p2 = A.size() - 1;
+    while (p1 < p2)
+    {
+        maxArea = max(maxArea, min(A[p1], A[p2]) * (p2 - p1));
+        if (A[p2] > A[p1])
+        {
+            p1++;
+        }
+        else
+        {
+            p2--;
         }
     }
 
     return maxArea;
 }
 
-int main() {
-    vector<int> A1 = {1, 5, 4, 3};
-    cout << "Maximum Area (Example 1): " << maxArea(A1) << endl;
-
-    vector<int> A2 = {1};
-    cout << "Maximum Area (Example 2): " << maxArea(A2) << endl;
+int main()
+{
+    vector<int> A1 = {3, 5, 4, 7, 3, 6, 5, 4, 1, 2 };
+    cout << "Maximum Area : " << maxArea(A1) << endl;
 
     return 0;
 }
