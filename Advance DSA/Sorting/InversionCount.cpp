@@ -6,57 +6,69 @@
 #include <vector>
 using namespace std;
 
-int mergeAndCount(vector<int> &arr, vector<int> &temp, int left, int mid, int right)
+int inversionsCount(vector<int> &A, vector<int> &B)
 {
-    int i = left;
-    int j = mid + 1;
-    int k = left;
-    int inv_cnt = 0;
-    while (i <= mid && j <= right)
+    int i = 0, j = 0, count = 0;
+    while (i < A.size() && j < B.size())
     {
-        if (arr[i] <= arr[j])
+        if (A[i] > B[j])
         {
-            temp[k++] = arr[i++];
+            count += (A.size() - i);
+            j++;
         }
         else
         {
-            temp[k++] = arr[j++];
-            inv_cnt += (mid - i + 1);
+            i++;
         }
     }
-    while (i <= mid)
-        temp[k++] = arr[i++];
-    while (j <= right)
-        temp[k++] = arr[j++];
-
-    for (int i = left; i <= right; i++)
-    {
-        arr[i] = temp[i];
-    }
-
-    return inv_cnt;
+    return count;
 }
 
-// Function to recursively apply merge sort and count inversions
-int mergeSortAndCount(vector<int> &arr, vector<int> &temp, int left, int right)
+void merge(vector<int> &A, vector<int> &B, vector<int> &res)
 {
-    int inv_cnt = 0;
-    if (left < right)
+    int i = 0, j = 0, k = 0;
+    while (i < A.size() && j < B.size())
     {
-        int mid = left + (right - left) / 2;
-        inv_cnt += mergeSortAndCount(arr, temp, left, mid);
-        inv_cnt += mergeSortAndCount(arr, temp, mid + 1, right);
-        inv_cnt += mergeAndCount(arr, temp, left, mid, right);
+        if (A[i] <= B[j])
+        {
+            res[k++] = A[i++];
+        }
+        else
+        {
+            res[k++] = B[j++];
+        }
     }
-    return inv_cnt;
+     while (i < A.size())
+    {
+        res[k++] = A[i++];
+    }
+    while (j < B.size())
+    {
+        res[k++] = B[j++];
+    }
 }
 
-// Main function to count inversions
-int inversionCount(vector<int> &v)
+int mergeSort(vector<int> &V)
 {
-    int n = v.size();
-    vector<int> temp(n);
-    return mergeSortAndCount(v, temp, 0, n - 1);
+    int n = V.size();
+    if (n == 1)
+        return 0;
+    int cnt = 0;
+    int n1 = n / 2, n2 = n - n / 2;
+    vector<int> A(n1), B(n2);
+    for (int i = 0; i < n1; i++)
+    {
+        A[i] = V[i];
+    }
+    for (int i = 0; i < n2; i++)
+    {
+        B[i] = V[i + n1];
+    }
+    cnt += mergeSort(A);
+    cnt += mergeSort(B);
+    cnt+=inversionsCount(A,B);
+    merge(A, B, V);
+    return cnt;
 }
 
 int main()
@@ -72,6 +84,6 @@ int main()
         cin >> value;
         v.push_back(value);
     }
-    int ans = inversionCount(v);
+    int ans = mergeSort(v);
     cout << "Total Inversion : " << ans;
 }
