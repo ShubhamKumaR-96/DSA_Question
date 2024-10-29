@@ -6,30 +6,22 @@ using namespace std;
 
 string sortingOrder(string str)
 {
-    int n = str.size();
-    int count[26] = {0}; // Frequency array for 'a' to 'z'
-    string result = "";  // Resultant string without spaces
-
-    // Counting frequency of each character and ignoring spaces
-    for (int i = 0; i < n; i++)
+    int count[26] = {0};
+    for (int i = 0; i < str.size(); i++)
     {
-        if (str[i] != ' ')
-        { // Ignore spaces
-            int index = str[i] - 'a';
-            count[index] += 1;
-        }
+        int idx = str[i] - 'a';
+        count[idx]++;
     }
-
-    // Rebuilding the string in sorted order
+    str.clear();
     for (int i = 0; i < 26; i++)
     {
         for (int j = 0; j < count[i]; j++)
         {
-            result += (i + 'a');
+            str.push_back(i + 'a');
         }
     }
 
-    return result;
+    return str;
 }
 
 int main()
